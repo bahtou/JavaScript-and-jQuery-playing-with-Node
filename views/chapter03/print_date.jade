@@ -1,0 +1,17 @@
+extends ../layout
+
+append scripts
+  script
+    function printToday() {
+    var today = new Date();
+    document.write(today.toDateString());
+    }
+
+block content
+  .main
+    h1= title
+    p 
+      | Today is 
+      strong
+        script
+          printToday();

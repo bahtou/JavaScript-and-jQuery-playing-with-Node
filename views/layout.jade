@@ -1,0 +1,30 @@
+doctype 5
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    title= title
+    block stylesheets
+      link(href='/_css/site.css', rel='stylesheet', )
+    block scripts
+
+  body
+    .wrapper
+      .header
+        p.logo
+          | JavaScript 
+          i  &  
+          |  jQuery
+          i.mm The
+            br
+            | Missing
+            br
+            | Manual
+      .content
+        block content
+      .footer
+        p
+          | JavaScript &amp; jQuery: The Missing Manual, by 
+          a(href='http://sawmac.com/') David McFarland
+          | . Published by 
+          a(href='http://oreilly.com/') O'Reilly Media, Inc
+          | .

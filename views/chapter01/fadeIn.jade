@@ -1,0 +1,14 @@
+extends ../layout
+
+append scripts
+  script(src='/_js/jquery-1.8.1.min.js')
+  script
+    $('document').ready(function() {
+      $('body').hide().fadeIn(3000);
+      }); //end ready
+
+block content
+  .main
+    h1 Fading In 
+    p Here I come!!
+    .aside

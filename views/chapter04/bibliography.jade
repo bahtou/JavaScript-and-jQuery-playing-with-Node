@@ -1,0 +1,29 @@
+extends ../layout
+
+append scripts
+  script(src='/_js/jquery-1.8.1.min.js')
+  script
+    $(document).ready(function() {
+      var biblioText = '';
+      $('.main a[href^="http://"]').each(function() {
+          var siteText = $(this).text();
+          var extLink = $(this).attr('href');
+          biblioText += '<li><strong>' + siteText + ":</strong> " + extLink + '</li>\n';
+      }); // end each
+      if (biblioText) {
+          bibHTML = '<div id="bib"><p>Websites referenced in this document:</p></div>';
+          $(bibHTML).append(biblioText).appendTo($('.main'));
+      }
+    }); // end ready
+
+block content
+  div.main
+    h1= title
+    p
+      | Throughout history, there have been many fantastic Web sites. 
+      a(href="http://www.yahoo.com/") Yahoo! 
+      | comes to mind, as does 
+      a( href="http://www.google.com/") Google
+      |. And few will forget the culture-shaping influence of 
+      a(href="http://www.hampsterdance.com/") Hampster Dance
+      | .

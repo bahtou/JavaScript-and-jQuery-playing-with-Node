@@ -1,0 +1,16 @@
+extends ../layout
+
+append scripts
+  script
+    var hi = 'hello internet!';
+    var num = '1.222';
+    var nud = '23345';
+    console.log('Say it! \n%s', hi);
+    console.log('My lucky number: %f', num);
+    console.log('My lucky number: ' + nud);
+
+block content
+  .main
+    h1= title
+    p
+      | Notice that you don't see this page or text, until you close the Alert box.

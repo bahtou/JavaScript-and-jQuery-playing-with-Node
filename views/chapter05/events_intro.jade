@@ -1,0 +1,44 @@
+extends ../layout
+
+append scripts
+  script(src='/_js/jquery-1.8.1.min.js')
+  script
+    $(document).ready( function() {
+      $('body').dblclick( function( ) {
+          alert('ouch')
+      }); //end double click
+      
+      var count = 1;
+      $('a').mouseover( function() {
+          var message = '<p>You moused over a link: ' + count + '</p>';
+          $('.main').append(message);
+          count++;
+      }); //end mouseover
+      
+      $('#button').click( function() {
+          $(this).val('Stop that!');
+      }); //end click
+      
+      $('#textfield').focus( function() {
+          $(this).css('background-color', 'red');
+      }); //end focus
+      
+      $('#textfield').blur( function() {
+          $(this).css('background-color', 'white');
+      }); //end blur
+      
+    }); //end ready
+
+block content
+  div.main
+    h1= title
+    p
+      a(href='#') A link
+    form(action='#', method='GET')
+      fieldset
+        legend
+          | A Form
+        p
+          input(name='button', type='button', id='button', value='A Button')
+        p
+          input(name='textfield', type='text', id='textfield')

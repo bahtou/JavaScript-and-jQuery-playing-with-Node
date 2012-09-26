@@ -13,7 +13,7 @@ Copy and paste the folder into the `_js` folder.
 The `_js` folder should now contain 3three folders.  
 
 * Chapter 8 has a folder labeled `images` with a single image file: `arrow.png`.  
-Copy and paste the image file into the `_image` folder.
+Copy and paste the image file into the `_images` folder.
 
 
 ## misc  

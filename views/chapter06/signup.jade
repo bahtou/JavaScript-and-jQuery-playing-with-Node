@@ -1,0 +1,84 @@
+extends ../layout
+
+append scripts
+  script(src='/_js/jquery-1.8.2.min.js')
+  script(src='/_js/jquery.easing.1.3.js')
+  script
+    $('document').ready(function() {
+      $('#login').animate(
+        {
+          left: '1130px'
+        },
+        2000, 'easeOutBounce');
+
+      $('#open').toggle(
+        function() {
+          $('#login form').slideToggle(300);
+          $(this).toggleClass('close');
+        },
+        function() {
+          $('#login form').slideToggle(300);
+          $(this).removeClass('close');
+        }
+      ); //end toggle
+    }); //end ready
+
+append stylesheets
+  style
+    #login {
+        width: 300px;
+        position: absolute;
+        left: 50px;
+        top: 10px;
+        z-index: 100;
+    }
+    #open {
+        margin: 0;
+        cursor: pointer;
+        background: rgb(255,255,255) url(../_images/open.png) no-repeat 8px 7px;
+        color: rgb(58,80,123);
+        padding:5px 0 2px 30px;
+    }
+    #login .close {
+        background-image: url(../_images/close.png);
+        background-color: rgb(110,138,195);
+    }
+    #open:hover {
+        color: rgb(0,0,0);
+        background-color: rgb(110,138,195);
+    }
+    #login form {
+        padding: 10px 10px 10px 10px;
+        display: none;
+        background-color: rgb(255,255,255);
+    }
+    #login label {
+        display: inline-block;
+        width: 100px;
+        text-align:right;
+        margin: 0 15px 0 0;
+        color: rgb(58,80,123);
+    }
+    #login input {
+        font-size: 14px;
+    }
+    #login #button {
+        margin-left: 15px;
+    }
+
+block content
+  div#login
+    p#open Login
+    form
+      p
+        label(for='username') Username:
+        input(type='text', name='username', id='username')
+      p
+        label(for='password') Password:
+        input(type='password', name='password', id='password')
+      p
+        input(type='submit', name='button', id='button', value='Submit')
+  div.content
+    div.main
+      h1= title
+      p Click the login button at the top of the page

@@ -1,0 +1,106 @@
+extends ../layout
+
+append stylesheets
+  style
+    #navigation ul, #navigation li {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+    }
+    #navigation a {
+      background-color: rgb(204,204,204);
+      text-decoration: none;
+      font: 16px 'ColaborateLightRegular', Arial, sans-serif;
+      text-indent: 10px;
+      border-top: 1px solid #ccc;
+      border-left:1px solid #ccc;
+      border-right:1px solid #999;
+      border-bottom:1px solid #999;
+      margin: 0px;
+      padding: 0px;
+      color: rgb(53,75,118);
+    }
+    #navigation a:hover {
+      border-top:1px solid #999;
+      border-left:1px solid #999;
+      border-right:1px solid #ccc;
+      border-bottom:1px solid #ccc;
+      background-color: #555;
+      color: white;
+    }
+    #navigation .stack > a {
+      background-image: url(/_images/arrow.png);
+      background-repeat: no-repeat;
+      background-position: 97% 8px;
+    }
+    #navigation .stack > a:hover {
+      background-position: 97% -78px;
+    }
+    #navigation ul .stack > a {
+      background-position: 97% -21px;
+    }
+    #navigation ul .stack > a:hover {
+      background-position: 97% -54px;
+    }
+
+append scripts
+  script(src='/_js/jquery-1.8.2.min.js')
+  script(src='/_js/nav1.1.min.js')
+  script
+    $(document).ready(function() {
+      $('#navigation').navPlugin({
+        'itemWidth': 150,
+        'itemHeight': 30,
+        'navEffect': 'slide',
+        'speed': 250
+      }); //end navPlugin
+    }); //end ready
+
+block content
+  div.content
+    div.main
+      h1= title
+      ul#navigation
+        li
+          a(href='#') Home
+        li
+          a(href='#') About Us
+          ul
+            li
+              a(href='#') Our History
+            li
+              a(href='#') Driving Directions
+            li
+              a(href='#') Hours
+        li
+          a(href='#') Our Products
+          ul
+            li
+              a(href='#') Gizmos
+              ul
+                li
+                  a(href='#') Gizmo
+                li
+                  a(href='#') Gizmo
+                li
+                  a(href='#') Gizmo
+            li
+              a(href='#') Gadgets
+              ul
+                li
+                  a(href='#') Gadget Basic
+                li
+                  a(href='#') Gadget Standard
+                li
+                  a(href='#') Gadget Supreme
+                ul
+                  li
+                    a(href='#') Gadget Supreme A
+                  li
+                    a(href='#') Gadget Supreme B
+            li
+              a(href='#') Time Machines
+
+      p(style='clear: both; padding-top: 20px')
+        | Example of a simple navigation menu using jQuery and Daniel Thomson's 
+        a(href="https://github.com/dansdom/plugins-navigation") jQuery Navigation Plugin.

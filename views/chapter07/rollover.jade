@@ -1,0 +1,50 @@
+extends ../layout
+
+append stylesheets
+  style
+    #gallery img {
+      display: inline-block;
+      margin: 10px;
+      border: 1px solid rgb(0,0,0);
+    }
+
+append scripts
+  script(src='/_js/jquery-1.8.2.min.js')
+  script
+    $('document').ready(function() {
+      $('#gallery img').each(function() {
+        var imgFile = $(this).attr('src');
+        var preloadImage = new Image(); //create <img> tag
+        var imgExt = /(\.\w{3,4}$)/
+        console.log(imgFile);
+        preloadImage.src = imgFile.replace(imgExt, '_h$1');
+        console.log(preloadImage);
+      $(this).hover(
+        function() {
+          $(this).attr('src', preloadImage.src);
+        },
+        function() {
+          $(this).attr('src', imgFile);
+        }
+      ); //end hover
+      }); //end each
+    }); //end ready
+
+block content
+  div.content
+    div.main
+      h1= title
+      p Mouse over the images below
+      div#gallery
+        a(href="/_images/large/blue.jpg")
+          img(src="/_images/small/blue.jpg", width="70", height="70", alt="blue")
+        a(href="/_images/large/green.jpg")
+          img(src="/_images/small/green.jpg", width="70", height="70", alt="green")
+        a(href="/_images/large/orange.jpg")
+          img(src="/_images/small/orange.jpg", width="70", height="70", alt="orange")
+        a(href="/_images/large/purple.jpg")
+          img(src="/_images/small/purple.jpg", width="70", height="70", alt="purple")
+        a(href="/_images/large/red.jpg")
+          img(src="/_images/small/red.jpg", width="70", height="70", alt="red")
+        a(href="/_images/large/yellow.jpg")
+          img(src="/_images/small/yellow.jpg", width="70", height="70", alt="yellow")

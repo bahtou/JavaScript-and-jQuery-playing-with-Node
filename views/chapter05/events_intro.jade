@@ -1,7 +1,7 @@
 extends ../layout
 
 append scripts
-  script(src='/_js/jquery-1.8.1.min.js')
+  script(src='/_js/jquery-1.8.2.min.js')
   script
     $(document).ready( function() {
       $('body').dblclick( function( ) {
@@ -30,15 +30,16 @@ append scripts
     }); //end ready
 
 block content
-  div.main
-    h1= title
-    p
-      a(href='#') A link
-    form(action='#', method='GET')
-      fieldset
-        legend
-          | A Form
-        p
-          input(name='button', type='button', id='button', value='A Button')
-        p
-          input(name='textfield', type='text', id='textfield')
+  div.content
+    div.main
+      h1= title
+      p
+        a(href='#') A link
+      form(action='#', method='GET')
+        fieldset
+          legend
+            | A Form
+          p
+            input(name='button', type='button', id='button', value='A Button')
+          p
+            input(name='textfield', type='text', id='textfield')

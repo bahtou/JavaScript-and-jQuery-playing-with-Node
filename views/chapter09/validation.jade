@@ -1,0 +1,117 @@
+extends ../layout
+
+append stylesheets
+  style
+    #signup .indent label.error {
+      margin-left: 0;
+    }
+
+    #signup label.error {
+      font-size: 0.8em;
+      color: #F00;
+      font-weight: bold;
+      display: block;
+      margin-left: 215px;
+    }
+
+    #signup input.error, #signup select.error {
+      background: #FFA9B8;
+      border: 1px solid red;
+    }
+
+append scripts
+  script(src='/_js/jquery-1.8.2.min.js')
+  script(src='/_js/jquery.validate.min.js')
+  script
+    $(document).ready(function(){
+      $('#signup').validate({
+
+        rules: {
+          email: {
+            required: true,
+            email: true
+          },
+          password: {
+            required: true,
+            rangelength: [8,16]
+          },
+          confirm_password: {equalTo: '#password'},
+          spam: 'required'
+        }, //end rules
+
+        messages: {
+          email: {
+            required: 'Please supply an e-mail address.',
+            email: 'This is not a valid email address.'
+          },
+          password: {
+            required: 'Please type a password', 
+            rangelength: 'Password must be between 8 and 16 characters long.'
+          },
+          confirm_password: {
+            equalTo: 'The two passwords do no match.'
+          }
+        }, //end messages
+        errorPlacement: function(error, element) {
+          if (element.is(':radio') || element.is(':checkbox')) {
+            error.appendTo(element.parent());
+          } else {
+            error.insertAfter(element);
+          } //end errorPlacement
+        }
+      }); //end validate
+      
+    }); //end ready
+
+block content
+  div.content
+    div.main
+      h1= title
+      form(action='/process', method='POST', name='signup', id='signup')
+        div
+          label(for='name', class='label') Name
+          input(name='name', type='text', id='name', class='required', title='Please type your name')
+        div
+          label(for='email', class='label') E-mail Address
+          input(name='email', type='text', id='email')
+        div
+          label(for='password', class='label') Password
+          input(name='password', type='password', id='password')
+        div
+          label(for='confirm_password', class='label') Confirm Password
+          input(name='confirm_password', type='password', id='confirm_password')
+        div
+          span.label Hobbies
+          input(name='hobby', type='checkbox', id='heliskiing', value='heliskiing', class='required', title='Please check at least 1 hobby')
+          label(for='heliskiing') Heli-skiing
+
+          input(name='hobby', type='checkbox', id='pickle', value='pickle') 
+          label(for='pickle') Pickle eating
+
+          input(name='hobby', type='checkbox', id='walnut', value='walnut')
+          label(for='walnut') Making walnut butter
+        div
+          label(for='dob', class='label') Date of birth
+          input(name='dob', type='text', id='dob', class='date', title='Please type your date of birth using this format: 01/09/2000')
+        div
+          label(for='planet', class='label') Planet of birth
+          select(name='planet', id='planet', class='required', title='Please choose a planet')
+            option(value='') --Please select one--
+            option(value='earth') Earth
+            option(value='mars') Mars
+            option(value='alpha centauri') Alpha Centauri
+            option(value='forget about it') You've never heard of it
+        div
+          label(for='comments', class='label') comments
+          textarea(name='comments', cols='15', rows='5', id='comments')
+        div.labelBlock Would you like to receive annoying e-mail from us?
+        div.indent
+          input(type='radio', name='spam', id='yes', value='yes', class='required', title='Please select an option')
+          label(for='yes') Yes
+          input(type='radio', name='spam', id='definitely', value='definitely')
+          label(for='definitely') Definitely
+          input(type='radio', name='spam', id='choice', value='choice')
+          label(for='choice') Do I have a choice?
+
+        div
+          input(type='submit', name='submit', id='submit', value='Submit')

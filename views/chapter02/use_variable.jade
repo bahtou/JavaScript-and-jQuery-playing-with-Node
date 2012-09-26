@@ -1,11 +1,12 @@
 extends ../layout
 
 block content
-  .main
-    h1= title
-    script
-      var firstName = 'Cookie';
-      var lastName = 'Jar';
-      document.write('<p>');
-      document.write(firstName + ' ' + lastName);
-      document.write('</p>');
+  div.content
+    div.main
+      h1= title
+      script
+        var firstName = 'Cookie';
+        var lastName = 'Jar';
+        document.write('<p>');
+        document.write(firstName + ' ' + lastName);
+        document.write('</p>');

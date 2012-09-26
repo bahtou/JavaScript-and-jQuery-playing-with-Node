@@ -15,7 +15,7 @@ append stylesheets
     }
 
 append scripts
-  script(src='/_js/jquery-1.8.1.min.js')
+  script(src='/_js/jquery-1.8.2.min.js')
   script
     $(document).ready(function() {
       $('.answer').hide();
@@ -31,26 +31,27 @@ append scripts
     }); // end ready()
 
 block content
-  div.main
-    h1= title
-    h2 I've heard that JavaScript is the long-lost fountain of youth. 
-      | Is this true?
-    div.answer
-      p
-        | Why, yes it is! Studies prove that learning JavaScript freshens the mind
-        | and extends life span by several hundred years. (Note: some scientists
-        | disagree with these claims.)
-    h2  Can JavaScript really solve all of my problems?
-    div.answer
-      p
-        | Why, yes it can! It's the most versatile programming language ever created
-        | and is trained to provide financial management advice, life-saving CPR,
-        | and even to take care of household pets.
-    h2 Is there nothing JavaScript 
-      em can&#8217;t 
-      | do?
-    div.answer
-      p
-        | Why, no there isn&#8217;t! It&#8217;s even able to write its own public
-        | relations-oriented Frequently Asked Questions pages. Now that&#8217;s one
-        | smart programming language!
+  div.content
+    div.main
+      h1= title
+      h2 I've heard that JavaScript is the long-lost fountain of youth. 
+        | Is this true?
+      div.answer
+        p
+          | Why, yes it is! Studies prove that learning JavaScript freshens the mind
+          | and extends life span by several hundred years. (Note: some scientists
+          | disagree with these claims.)
+      h2  Can JavaScript really solve all of my problems?
+      div.answer
+        p
+          | Why, yes it can! It's the most versatile programming language ever created
+          | and is trained to provide financial management advice, life-saving CPR,
+          | and even to take care of household pets.
+      h2 Is there nothing JavaScript 
+        em can&#8217;t 
+        | do?
+      div.answer
+        p
+          | Why, no there isn&#8217;t! It&#8217;s even able to write its own public
+          | relations-oriented Frequently Asked Questions pages. Now that&#8217;s one
+          | smart programming language!

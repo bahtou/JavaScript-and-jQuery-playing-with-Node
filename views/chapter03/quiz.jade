@@ -22,10 +22,11 @@ append scripts
     }
 
 block content
-  .main
-    h1= title
-    script
-      var message = 'You got ' + score;
-      message += ' out of ' + questions.length;
-      message += ' questions correct.';
-      document.write('<p>' + message + '</p>');
+  div.content
+    div.main
+      h1= title
+      script
+        var message = 'You got ' + score;
+        message += ' out of ' + questions.length;
+        message += ' questions correct.';
+        document.write('<p>' + message + '</p>');

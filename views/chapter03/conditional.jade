@@ -15,13 +15,14 @@ append scripts
     */
 
 block content
-  .main
-    h1= title
-    script
-      if (luckyNumber == 7) {
-          document.write('<p>Hey, 7 is my lucky number too!</p>');
-      } else if (luckyNumber == 13 || luckyNumber == 24) {
-          document.write('<p>Wooh. ' + luckyNumber + '? That\'s an unlucky number!</p>');
-      } else {
-          document.write('<p>The number ' + luckyNumber + ' is lucky for you!</p>');
-      }
+  div.content
+    div.main
+      h1= title
+      script
+        if (luckyNumber == 7) {
+            document.write('<p>Hey, 7 is my lucky number too!</p>');
+        } else if (luckyNumber == 13 || luckyNumber == 24) {
+            document.write('<p>Wooh. ' + luckyNumber + '? That\'s an unlucky number!</p>');
+        } else {
+            document.write('<p>The number ' + luckyNumber + ' is lucky for you!</p>');
+        }

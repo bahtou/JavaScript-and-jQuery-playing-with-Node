@@ -8,10 +8,11 @@ append scripts
     }
 
 block content
-  .main
-    h1= title
-    p 
-      | Today is 
-      strong
-        script
-          printToday();
+  div.content
+    div.main
+      h1= title
+      p 
+        | Today is 
+        strong
+          script
+            printToday();

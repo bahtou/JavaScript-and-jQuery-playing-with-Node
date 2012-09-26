@@ -3,3 +3,7 @@ module.exports.Two = require('./chapter02/index');
 module.exports.Three = require('./chapter03/index');
 module.exports.Four = require('./chapter04/index');
 module.exports.Five = require('./chapter05/index');
+module.exports.Six = require('./chapter06/index');
+module.exports.Seven = require('./chapter07/index');
+module.exports.Eight = require('./chapter08/index');
+module.exports.Nine = require('./chapter09/index');

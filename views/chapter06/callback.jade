@@ -1,0 +1,61 @@
+extends ../layout
+
+append stylesheets
+  style
+    #figure {
+      position: absolute; //if you say relative, image animates in the center 
+      width: 400px; 
+      margin: 0 auto; 
+    }
+    #caption {
+      position: absolute;
+      width: 340px;
+      background-color: black;
+      bottom: 10px;
+      left: 24px;
+      padding: 5px;
+      border: 1px solid white;
+    }
+
+append scripts
+  script(src='/_js/jquery-1.8.2.min.js')
+  script(src='/_js/jquery.easing.1.3.js')
+  script
+    $(document).ready(function() {
+      $('#figure').width(0).height(0).css('opacity', 0);
+      $('#caption').hide();
+      $('html').toggle(
+        function() {
+          $('#figure').stop().show().animate({
+              width: '400px',
+              height: '300px',
+              opacity: 1
+          }, 1000
+          , function() {
+              $('#caption').stop().fadeIn(1000);
+          }
+          ); //end animate
+        }, 
+        function() {
+          $('#caption').stop().fadeOut(1000, function() {
+              $('#figure').stop().animate(
+                {
+                 width: '0px',
+                 height: '0px',
+                 opacity: 0
+                },
+                 1000
+              ); //end animate
+          });
+        }
+      ); //end toggle
+    }); //end ready
+
+block content
+  div.content
+    div.main
+      h1= title
+      p Click anywhere to start the animation
+      div#figure
+        img(src='/_images/pencils.jpg', width='400', height='300', alt='pencils')
+        p#caption Pencils!!!

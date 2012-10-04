@@ -1,0 +1,29 @@
+extends ../layout
+
+append stylesheets
+  style
+    form {
+      padding: 10px 10px 10px 10px;
+    }
+    label {
+      display: inline-block;
+      width: 100px;
+      text-align:right;
+      margin: 0 15px 0 0;
+      color: white;
+    }
+    input {
+      font-size: 14px;
+    }
+    #button {
+      margin-left: 115px;
+    }
+
+append scripts
+  script(src='/_js/jquery-1.8.1.min.js')
+    
+block content
+        div.main
+          h1=  title
+          #login-status
+            p= status

@@ -1,0 +1,48 @@
+extends ../layout
+
+append stylesheets
+  style
+    #newslinks li {
+      display: inline-block;
+      margin-right: 20px;
+    }
+    #newslinks li a {
+      padding: 5px 10px;
+      background-color: white;
+      color: black !important;
+      text-decoration: none;
+    }
+    #newslinks li a:hover {
+      background-color: rgb(110,138,195);
+      color: white !important;
+    }
+    #headlines #newsItem {
+      margin-top: 10px;
+      padding: 20px;
+      border: 1px solid white;
+    }
+
+append scripts
+  script(src='/_js/jquery-1.8.2.min.js')
+  script
+    $(document).ready(function() {
+      $('#newslinks a').click(function() {
+        var url = $(this).attr('href');
+        $('#headlines').load(url + ' #newsItem');
+        return false;
+      }); //end click
+      // $('#newslinks a:first').click();
+    }); // end ready
+
+block content
+  div.content
+    div.main
+      h1= title
+      ul#newslinks
+        li
+          a(href='/today') Today&#8217;s News
+        li
+          a(href='/yesterday') Yesterday&#8217;s News
+        li
+          a(href='/lastweek') Last Week&#8217;s News
+      div#headlines

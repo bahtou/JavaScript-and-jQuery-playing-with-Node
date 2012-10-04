@@ -1,0 +1,219 @@
+extends ../layout
+
+append stylesheets
+   style
+    #textHolder, #photoHolder {
+      padding: 10px;
+      border: 1px solid #666;
+      margin-bottom: 15px;
+      margin-top: 15px;
+    }
+    .idLabel {
+      position: absolute;
+      top: 10px;
+      font-weight: bold;
+      color: #FFF;
+      background: #F00;
+      display: inline;
+      left: 10px;
+      padding-right: 5px;
+      padding-left: 5px;
+    }
+    #photo .idLabel {
+      left: 180px;
+    }
+    .col1, .col2, .col3 {
+      float: left;
+      width: 32%;
+      padding-bottom: 15px;
+    }
+    #photo, #text {
+      clear: left;
+      position: relative;
+    }
+    .col1, .col2 {
+      margin-right: 5px;
+    }
+    #photo {
+      text-align: center;
+    }
+    body {
+      -moz-opacity:.999;
+      overflow: scroll;
+    }
+    #main p.effect {
+      font: bold 14px/1.5 "Courier New", Courier, monospace;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+    .effect {
+      cursor:pointer;
+    }
+    .col1 p, .col2 p, .col3 p {
+      width: 180px;
+      background-color: white;
+      padding: 5px 10px;
+      color: black;
+      text-align:center;
+    }
+    .col1 p:hover, .col2 p:hover, .col3 p:hover {
+      color: #FFF;
+      background-color: #5E82CB;
+    }
+    input {
+      font-size: 12px;
+      position: absolute;
+      background-color: #FFC;
+      width: 20px;
+    }
+
+append scripts
+  script(src='/_js/jquery-1.8.2.min.js')
+  script(src='/_js/site.js')
+  script
+    $(document).ready(function() {
+      $('.effect').click(function(evt) {
+       var container = $(this).parents('#textHolder');
+       var targetID = (container.length==1) ? '#text' : '#photo';
+       var target = $(targetID);
+       var action = $(this).attr('title');
+       switch (action) {
+        case 'hide' :
+           target.hide();
+           break;
+        case 'show' :
+          target.show();
+          break;
+        case 'toggle' :
+          target.toggle();
+          break;
+        case 'fadeIn' :
+          target.fadeIn();
+          break;
+        case 'fadeOut' :
+          target.fadeOut();
+          break;
+        case 'slideDown' :
+          target.slideDown();
+          break;
+        case 'slideUp' :
+          target.slideUp();
+          break;
+        case 'slideToggle' :
+          target.slideToggle();
+          break;
+        case 'fadeTo':
+          varFadeValue = (targetID=='#text') ? $('#textFade').val() :  $('#photoFade').val();
+          target.fadeTo('slow',varFadeValue);
+          break;
+       }
+       setButtonState(targetID);
+      });
+
+      function setButtonState(targID) {
+        if ($('#photo').is(':animated') || $('#text').is(':animated')) {
+          setTimeout(
+              function() {
+                  setButtonState(targID)
+              },
+              500);
+        }
+        var vis = $(targID).is(':visible');
+        $('.effect:contains('+targID+')').each(function() {
+            if (vis) {
+              if ($(this).hasClass('vis')) {
+                $(this).fadeTo('normal',1);
+              }
+              if ($(this).hasClass('hid')) {
+                $(this).fadeTo('normal',.25);
+              }
+            } else {
+              if ($(this).hasClass('hid')) {
+                $(this).fadeTo('normal',1);
+              }
+              if ($(this).hasClass('vis')) {
+                $(this).fadeTo('normal',.25);
+              }
+            }
+        });
+      }
+
+      setButtonState('#text');
+      setButtonState('#photo');
+
+      }); // end ready
+
+block content
+  .content
+    .main
+      h1= title
+      #textHolder.clear
+        .col1
+          p.effect.hid(title='show')   show('#text')
+          p.effect.vis(title='hide')   hide('#text')
+          p.effect(title='toggle') toggle('#text')
+        .col2
+          p.effect.hid(title='fadeIn')  fadeIn('#text')
+          p.effect.vis(title='fadeOut') fadeOut('#text')
+          p.effect(title='fadeTo')
+            | fadeTo('#text')
+            input#textFade(name='textFade', type='text', value='.5', size='3', maxlength='4')
+        .col3
+          p.effect.hid(title='slideDown')   slideDown('#text')
+          p.effect.vis(title='slideUp')     slideUp('#text')
+          p.effect(title='slideToggle') slideToggle('#text')
+        #text
+          p.idLabel #text
+          p
+            | Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus rutrum elit ac massa. Proin sit amet dui et dui venenatis aliquam. Vestibulum et metus sed elit convallis convallis. Quisque sem. Curabitur mauris libero, nonummy non, commodo id, pretium quis, justo. Sed convallis eros et odio. Maecenas blandit. Sed at libero sit amet mauris congue pellentesque.
+      #photoHolder.clear
+        .col1
+          p.effect.hid(title='show')   show('#photo')
+          p.effect.vis(title='hide')   hide('#photo')
+          p.effect(title='toggle') toggle('#photo')
+        .col2
+          p.effect.hid(title='fadeIn')  fadeIn('#photo')
+          p.effect.vis(title='fadeOut') fadeOut('#photo')
+          p.effect(title='fadeTo')
+            | fadeTo('#photo')
+            input#photoFade(name='photoFade', type='text', value='.5', size='3', maxlength='4')
+        .col3
+          p.effect.hid(title='slideDown')   slideDown('#photo')
+          p.effect.vis(title='slideUp')     slideUp('#photo')
+          p.effect(title='slideToggle') slideToggle('#photo')
+        #photo
+          p.idLabel #photo
+          img(src='/_images/large/orange.jpg', width='400', height='300', alt='Orange')
+
+block end
+  #resources
+    p.open
+      | +
+
+    h2
+      | Test Beds
+    ul.nav
+      li
+        a(href='/selectors') jQuery Selectors Testbed
+      li
+        a(href='/content_functions') jQuery Content Functions Test Bed
+      li
+        a(href='/events') Events Test Bed
+      li
+        a(href='/effects') jQuery Effects Test Bed
+      li
+        a(href='/array_methods') Array Methods
+      li
+        a(href='/regex_tester') Regular Expression Tester
+
+    h2
+      | jQuery Resources
+    ul.nav
+      li
+        a(href='http://jquery.com') jQuery
+      li
+        a(href='http://jqueryui.com/') jQuery UI
+      li
+        a(href='http://jquerymobile.com/') jQuery Mobile
+      li
+        a(href='http://jqapi.com/') jQAPI.com

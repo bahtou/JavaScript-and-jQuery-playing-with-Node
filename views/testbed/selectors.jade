@@ -1,0 +1,201 @@
+extends ../layout
+
+append scripts
+  script(src='/_js/jquery-1.8.2.min.js')
+  script(src='/_js/site.js')
+  script(src='/_js/jquery-ui-1.8.23.min.js')
+  script
+    $(document).ready(function() {
+      $('#submit').attr("disabled","disabled");
+
+      var highlight = {
+        current: false
+      };
+
+      $('#selectorList li').each(function() {
+        var stuff = "<a href='#'>" + $(this).text() + '</a>';
+        $(this).html(stuff);
+      });
+
+      $('#selectorList li a').addClass('example').click(function(event) {
+        $('#selector').val($(this).text());
+        $('#apply').click();
+        event.stopPropagation();
+        return false;
+      });
+
+      $('#apply').click(apply);
+      $('form').submit(apply);
+
+      function apply() {
+        var selector = $('#selector').val();
+        clearPage();
+        if (selector === '') {
+          return false;
+        } else {
+          $('#jquerySelector').text(selector);
+          highlight.current = $(selector);
+          highlight.current.each(function() {
+
+            var w=$(this).outerWidth();
+            var h=$(this).outerHeight();
+
+            var t=$(this).offset().top;
+            var l=$(this).offset().left;
+
+            var stk = '<span class="highlighted"></span>';
+            var overlay = $(stk);
+            overlay.width(w).height(h);
+            overlay.css({top:t,left:l});
+            overlay.appendTo('body');
+            overlay.animate({ backgroundColor: "red" }, 1000);
+          });
+        }
+        $('#numElems').text(highlight.current.length);
+          return false;
+      }
+
+      $('#resetPage').click(function() {
+        resetPage();
+      }); //end click
+
+
+
+      $(document).click(function(event) {
+        $('.highlighted').remove();
+        $('#selector')[0].focus();
+      }); //end click
+
+
+      function clearPage() {
+        $('#jquerySelector').html('&nbsp;&nbsp;');
+        $('.highlighted').remove();
+        $('#numElems').html('&nbsp;');
+      }
+
+      function resetPage() {
+        $('#selector').val('');
+          clearPage();
+      }
+
+    }); //end ready
+
+block content
+  .content
+    .main
+      h1 jQuery Selector Test Bed 
+      .col1
+        p Type a jQuery selector in the field below to see what elements jQuery selects:
+        form(name='form1', method='post', action='')
+          .results
+            p
+              label
+                strong Selector:
+                input#selector(type='text', name='selector')
+              input#apply(type='submit', name='apply', value='Apply')
+              input#resetPage(type='reset', name='resetPage', value='Reset')
+            p
+              strong jQuery code: 
+              | $('
+              span#jquerySelector   
+              | ')
+            p
+              strong Elements found:
+              span#numElems
+          h2.shadowLine  Sample Selectors (click to try)
+          ul#selectorList.sideBySide
+            li *
+            li body
+            li p
+            li .example
+            li .main
+            li .main h2
+            li
+              | div
+              | h2
+            li h1+div
+            li :text
+            li #selectorList
+            li p:first
+            li .col2
+            li p:even
+            li p:odd
+            li p:lt(3)
+            li li:contains(.main)
+            li p:has(strong)
+            li a[href="#"]
+            li a[href*="oreilly.com"]
+            li a[href^="http://sawmac"]
+            li :checked
+            li :disabled
+      .col2
+        h2 More HTML to Select
+        h3 Heading 3
+        p
+          | Quis nostrud exercitation ut labore et
+          strong dolore magna aliqua.
+          | Sed do eiusmod tempor incididunt cupidatat non
+        h3 Heading 3
+        p
+          | Quis
+          em nostrud exercitation ut labore et dolore magna
+          | aliqua. Sed do eiusmod tempor incididunt cupidatat non
+        
+        h2 Form Fields
+        form#test(action='', method='post', name='form2')
+          p
+            label
+              input#checkbox1(name='checkbox1', type='checkbox', value='check1')
+              | Checkbox
+            br
+            label
+              input#checkbox2(name='checkbox2', type='checkbox', value='check2', checked='checked')
+              | Checkbox2
+          p
+            label
+              input#radio1(name='radio', type='radio', value='yes', checked='checked')
+              | Radio1
+            label
+              br
+              input#radio2(type='radio', name='radio', value='no')
+              | Radio2
+          p
+            input#submit(type='submit', name='submit', value='Submit', style='margin-left: 0;')
+        
+        ul
+          li Bulleted List Item 1
+          li Bulleted List Item 2
+      br.clearLeft
+
+block end
+  #resources
+    p.open
+      | +
+
+    h2
+      | Test Beds
+    ul.nav
+      li
+        a(href='/selectors') jQuery Selectors Testbed
+      li
+        a(href='/content_functions') jQuery Content Functions Test Bed
+      li
+        a(href='/events') Events Test Bed
+      li
+        a(href='/effects') jQuery Effects Test Bed
+      li
+        a(href='/array_methods') Array Methods
+      li
+        a(href='/regex_tester') Regular Expression Tester
+
+    h2
+      | jQuery Resources
+    ul.nav
+      li
+        a(href='http://jquery.com') jQuery
+      li
+        a(href='http://jqueryui.com/') jQuery UI
+      li
+        a(href='http://jquerymobile.com/') jQuery Mobile
+      li
+        a(href='http://jqapi.com/') jQAPI.com

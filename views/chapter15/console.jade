@@ -1,0 +1,26 @@
+extends ../layout
+
+append scripts
+  script(src='/_js/jquery-1.8.2.min.js')
+  script
+    $(document).ready(function() {
+      console.log('READY');
+      $('#comments').keyup(function() {
+        console.log('Evnet: keyup');
+        var text = $(this).val();
+        console.log('Contents of comments: %s', text);
+        var chars = text.length;
+        console.log('Number of characters: %d', chars);
+        $('#count').text('   ' + chars + ' characters');
+      }); //end keyup
+    }); //end ready
+
+block content
+  .content
+    .main
+      h1= title
+      form(name='console', method='POST', action='')
+        p
+          label(for='comments') Comments
+          textarea#comments(name='comments', cols='35', rows='5')
+          span#count

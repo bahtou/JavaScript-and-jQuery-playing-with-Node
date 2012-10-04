@@ -32,9 +32,9 @@ append scripts
         var imgFile = $(this).attr('src');
         var preloadImage = new Image(); //create <img> tag
         var imgExt = /(\.\w{3,4}$)/
-        console.log(imgFile);
+        //console.log(imgFile);
         preloadImage.src = imgFile.replace(imgExt, '_h$1');
-        console.log(preloadImage);
+        //console.log(preloadImage);
         
         $(this).hover(
           function() {

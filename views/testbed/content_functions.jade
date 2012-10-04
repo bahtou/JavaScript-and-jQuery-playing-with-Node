@@ -1,0 +1,156 @@
+extends ../layout
+
+append stylesheets
+  style
+    .results div code {
+      float: none;
+      margin-bottom: 25px;
+      display: block;
+      width: 100%;
+    }
+    #messageBox {
+      float: right;
+      padding: 10px;
+      border: 1px solid #0A3737;
+      margin-top: 15px;
+      width: 95%;
+    }
+    #messageBox code {
+      font-size: 15px;
+    }
+    #message {
+      font-size: 16px;
+      border: 1px solid red;
+      padding: 5px;
+    }
+    #message p {
+      font-size: 16px;
+    }
+    .codeRun {
+      font-weight: bold !important;
+      color: red;
+    }
+
+append scripts
+  script(src='/_js/jquery-1.8.2.min.js')
+  script(src='/_js/site.js')
+  script
+    $(document).ready(function() {
+      $('.example').each(function() {
+        $this = $(this); // reference to the p tag
+        $this.click(function() {
+          var oldHTML  = $('#messageBox #changeContainer').html();
+          oldHTML = oldHTML.replace(/></g, '><');
+          $('#before').text(oldHTML);
+          text = $('#content').val();
+
+          var codeElem = $(this).find('code');
+          var code = codeElem.text();
+          code = code.replace(/\(\)/, '("' + text + '")');
+          $('#jquery').text(code);
+          eval(code)
+
+          var newHTML=$('#messageBox #changeContainer').html();
+          newHTML = newHTML.replace(/></g,'> <');
+          $('#after').text(newHTML);
+          console.log($('#message').length);
+          if ($('#message').length < 1) {
+            if ($('#reload').length < 1) {
+              var reloadHTML = '<p class="example" id="reload">The message box is gone! You used either the .replaceWith() of .remove() function. Click here to re-create the message box.';
+            $('#messageBox').append(reloadHTML);
+            $('#reload').click(function() {
+              resetBox();
+              $(this).remove();
+            });
+            }
+          }
+        }); //end click
+      }); //end each
+      
+      function resetBox() {
+        console.log('here');
+        var boxHTML = '<div id="message"><p>New content will go here</p></div>';
+        $('#changeContainer').html(boxHTML);
+      }
+    }); //end ready
+
+block content
+  .content
+    .main
+      h1 Regular Expression Tester
+      .results.resultSection
+        #messageBox
+          #changeContainer
+            #message
+              p New content will go here
+
+          h2 HTML Before:
+          code#before #{'<div id="message"><p>New content will go here</p></div>'}
+          h2 HTML After:
+          code#after
+
+      form(name='form1', method='post', action='')
+        h2 Replacement Content
+        p
+          textarea#content(name='content', cols='30', rows='4')
+
+      h2 .text()
+      p.example
+        code $('#message').text();
+      h2 .html()
+      p.example
+        code $('#message').html();
+      h2 .append()
+      p.example
+        code $('#message').append();
+      h2 .prepend()
+      p.example
+        code $('#message').prepend();
+      h2 .after()
+      p.example
+        code $('#message').after();
+      h2 .before()
+      p.example
+        code $('#message').before();
+      h2 .replaceWith()
+      p.example
+        code $('#message').replaceWith();
+      h2 .remove()
+      p.example
+        code $('#message').remove();
+      h2 .empty()
+      p.example
+        code $('#message').empty();
+
+block end
+  #resources
+    p.open
+      | +
+
+    h2
+      | Test Beds
+    ul.nav
+      li
+        a(href='/selectors') jQuery Selectors Testbed
+      li
+        a(href='/content_functions') jQuery Content Functions Test Bed
+      li
+        a(href='/events') Events Test Bed
+      li
+        a(href='/effects') jQuery Effects Test Bed
+      li
+        a(href='/array_methods') Array Methods
+      li
+        a(href='/regex_tester') Regular Expression Tester
+
+    h2
+      | jQuery Resources
+    ul.nav
+      li
+        a(href='http://jquery.com') jQuery
+      li
+        a(href='http://jqueryui.com/') jQuery UI
+      li
+        a(href='http://jquerymobile.com/') jQuery Mobile
+      li
+        a(href='http://jqapi.com/') jQAPI.com

@@ -1,0 +1,124 @@
+extends ../layout
+
+append stylesheets
+  style
+    .tabs {
+      margin: 0;
+      padding: 0;
+      zoom : 1;
+    }
+
+    .tabs li {
+      float: left;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .tabs a {
+      display: block;
+      text-decoration: none;
+      padding: 3px 5px;
+      background-color: rgb(110,138,195);
+      margin-right: 10px;
+      border: 1px solid rgb(153,153,153);
+      margin-bottom: -1px;
+    }
+
+    .tabs .active {
+      border-bottom: 1px solid white;
+      background-color: white;
+      color: rgb(51,72,115);
+      position: relative;
+    }
+
+    .panelContainer {
+      clear: both;
+      margin-bottom: 25px;
+      border: 1px solid rgb(153,153,153);
+      background-color: white;
+      padding: 10px;
+    }
+
+    .panel h2 {
+      color: rgb(57,78,121);
+      text-shadow: none;
+    }
+
+    .panel p {
+      color: black;
+    }
+
+append scripts
+  script(src='/_js/jquery-1.8.2.min.js')
+  script
+    $(document).ready(function() {
+      $('.tabs a').click(function() {
+        $this = $(this);
+        $('.panel').hide();
+        $('.tabs a.active').removeClass('active');
+        $this.addClass('active').blur();
+        var panel = $this.attr('href');
+        $(panel).fadeIn(250);
+        return false;
+      }); //end click
+      $('.tabs li:first a').click();
+    }); //end ready
+block content
+  div.content
+    div.main
+      h1= title
+      div.tabbedPanels
+        ul.tabs
+          li
+            a(href='#panel1', tabindex='1') Tab 1
+          li
+            a(href='#panel2', tabindex='2') Tab 2
+          li
+            a(href='#panel3', tabindex='3') Tab 3
+
+        div.panelContainer
+          div.panel#panel1
+            h2 Panel 1 content
+            p
+              img.imgRight(src='/_images/small/red_h.jpg', alt='Red', width='70', height='70'))
+              | At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+              | praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias
+              | excepturi sint occaecati cupiditate non provident, similique sunt in culpa
+              | qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
+
+          div.panel#panel2
+            h2 Panel 2 content
+            p(style='text-align: center; margin-top: 25px')
+              img(src='/_images/large/slide4.jpg', width='610', height='342', alt='tees')
+
+          div.panel#panel3
+            h2 Panel 3 content
+            p
+              | At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+              | praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias
+              | excepturi sint occaecati cupiditate non provident, similique sunt in culpa
+              | qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
+            p
+              | At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+              | praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias
+              | excepturi sint occaecati cupiditate non provident, similique sunt in culpa
+              | qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
+            p
+              | At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+              | praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias
+              | excepturi sint occaecati cupiditate non provident, similique sunt in culpa
+              | qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
+      p
+        | At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+        | praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias
+        | excepturi sint occaecati cupiditate non provident, similique sunt in culpa
+        | qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et
+        | harum quidem rerum facilis est et expedita distinctio. Nam libero tempore,
+        | cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod
+        | maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor
+        | repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum
+        | necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae
+        | non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut
+        | aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus
+        | asperiores repellat.

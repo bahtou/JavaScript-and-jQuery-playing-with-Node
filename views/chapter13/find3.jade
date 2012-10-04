@@ -1,0 +1,30 @@
+extends ../layout
+
+append stylesheets
+  style
+    #gallery img {
+      display: inline-block;
+      margin: 10px;
+      position: relative; 
+    }
+append scripts
+  script(src='/_js/jquery-1.8.2.min.js')
+  script
+    $(document).ready(function() {
+      $('#gallery img').click(function(evt) {
+        $(this).siblings('img').fadeTo(500, .3)
+                               .fadeTo(250, 1)
+                               .animate({left: '-=20px'}, 200)
+                               .animate({left: '+=20px'}, 250);
+      }); //end click
+    }); //end ready
+
+block content
+  .content
+    .main
+      h1= title
+      #gallery
+        img(src='_images/chapter13/zoom_out.png', width='80', height='80', alt='zoom')
+        img(src='_images/chapter13/vacancy.png', width='80', height='80', alt='vacnacy')
+        img(src='_images/chapter13/user.png', width='80', height='80', alt='user')
+        img(src='_images/chapter13/upload.png', width='80', height='80', alt='upload')

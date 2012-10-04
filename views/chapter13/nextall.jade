@@ -1,0 +1,45 @@
+extends ../layout
+
+append stylesheets
+  style
+    .button {
+      width: 40px;
+      height: 40px;
+      background-color: white;
+      float: left;  
+      margin-right: 20px;
+    }
+
+append scripts
+  script(src='/_js/jquery-1.8.2.min.js')
+  script
+    $(document).ready(function() {
+      $('.button').mouseover(function() {
+        var $this = $(this);
+        // use stop() --chapter06
+        $this.stop().css({
+          'background-color': 'red',
+          'opacity': 1
+        });
+        $this.siblings('.button').css('background-color', 'white');
+        $this.prevAll('.button').stop().fadeTo(250, .5);
+        $this.nextAll('.button').stop().fadeTo(250, .1);
+      }); //end mouseover ..try click() event
+    }); //end ready
+
+block content
+  .content
+    .main
+      h1= title
+      p Click one of the boxes below
+      .button
+      .button
+      .button
+      .button
+      .button
+      .button
+      .button
+      .button
+      .button
+      .button
+      .button

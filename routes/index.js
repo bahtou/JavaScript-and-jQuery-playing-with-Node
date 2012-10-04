@@ -3,7 +3,18 @@ var chapters = require('./chapters')
   , two = chapters.Two
   , three = chapters.Three
   , four = chapters.Four
-  , five = chapters.Five;
+  , five = chapters.Five
+  , six = chapters.Six
+  , seven = chapters.Seven
+  , eight = chapters.Eight
+  , nine = chapters.Nine
+  , ten = chapters.Ten
+  , eleven = chapters.Eleven
+  , twelve = chapters.Twelve
+  , thirteen = chapters.Thirteen
+  , fourteen = chapters.Fourteen
+  , fifteen = chapters.Fifteen
+  , testbed = chapters.Testbed;
 
 
 module.exports = function(app) {
@@ -30,24 +41,68 @@ module.exports = function(app) {
   app.get('/events_intro', five.events_intro);
   app.get('/faq', five.faq);
 
+  //Chapter06
+  app.get('/signup', six.signup);
+  app.get('/animate', six.animate);
+  app.get('/callback', six.callback);
+
+  //Chapter07
+  app.get('/rollover', seven.rollover);
+  app.get('/gallery', seven.gallery);
+  app.get('/fancybox', seven.fancybox);
+  app.get('/youtube', seven.youtube);
+
+  //Chapter08
+  app.get('/in-page-links', eight.inpagelinks);
+  app.get('/menu', eight.menu);
+
+  //Chapter09
+  app.get('/validation', nine.validation);
+  app.get('/form', nine.form);
+  app.post('/process', nine.process);
+
+  //Chapter10
+  app.get('/tabs', ten.tabs);
+  app.get('/slider', ten.slider);
+  app.get('/page:num', ten.pages);
+  app.get('/tooltip', ten.tooltip);
 
   //Chapter11
-  //Submit Response
-  app.get('/login', function(req, res) {
-    res.render('login', { title: 'Login' });
-  });
+  app.get('/load', eleven.load);
+  app.get('/today', eleven.today);
+  app.get('/yesterday', eleven.yesterday);
+  app.get('/lastweek', eleven.lastweek);
 
-  //Response to submit
-  app.post('/login', function(req, res, next) {
-    var password = 'secret',
-        username = '007';
-    var data = req.body;
-    
-    if (data.username == username && data.password == password) {
-      res.render('loginSuccess', {title: 'Logged In', status: 'You are now logged in!'});
-    } else {
-      res.render('loginSuccess', {title: 'Login', status: 'Wrong username/password!'});
-    }
-  });
+  app.get('/login', eleven.login);
+  app.post('/login', eleven.loginPost);
 
+  //Chapter12
+  app.get('/flickr', twelve.flickr);
+  app.get('/map', twelve.map);
+
+
+  //Chapter13
+  app.get('/delegate', thirteen.delegate);
+  app.get('/find', thirteen.find);
+  app.get('/find3', thirteen.find3);
+  app.get('/nextall', thirteen.nextall);
+  app.get('/parent', thirteen.parent);
+  app.get('/siblings', thirteen.siblings);
+  app.get('/wrap', thirteen.wrap);
+
+  //Chapter14
+  app.get('/time', fourteen.time);
+
+  //Chapter15
+  app.get('/console', fifteen.console);
+  app.get('/debugger', fifteen.debugger);
+
+  //testbed
+  app.get('/array_methods', testbed.arrayMethods);
+  app.get('/content_functions', testbed.contentFunctions);
+  app.get('/effects', testbed.effects);
+  app.get('/events', testbed.events);
+  app.get('/regex_tester', testbed.regex_tester);
+  app.get('/selectors', testbed.selectors);
 };
+

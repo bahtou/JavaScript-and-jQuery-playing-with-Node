@@ -1,0 +1,54 @@
+extends ../layout
+
+append stylesheets
+  style
+    .add {
+      display: inline-block;
+      background-color: rgba(255,255,255,.8);
+      font-size: 12px;
+      padding: 0 5px;
+      margin-left: 10px;
+      color: black;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    .add:hover {
+      color: rgb(102,102,102);
+      background-color: rgb(204,255,0); 
+    }
+
+append scripts
+  script(src='/_js/jquery-1.8.2.min.js')
+  script
+    $(document).ready(function() {
+      // using bind
+      $('#without .add').bind('click', function() {
+        var $this = $(this);
+        var $parent = $this.parent();
+        $parent.after($parent.clone());
+        $this.remove();
+      }); //end bind
+
+      // using delegate
+      $('#with').delegate('.add', 'click', function() {
+        var $this = $(this);
+        var $parent = $this.parent();
+        $parent.after($parent.clone());
+        $this.remove();
+      }); //end delegate
+    }); //end ready
+
+block content
+  .content
+    .main
+      h1= title
+      #without
+        h2 With Bind (only the first time works)
+        p
+          | Item
+          span.add add new item
+      #with
+        h2 With Delegate (can keep adding items)
+        p
+          | Item
+          span.add add new item

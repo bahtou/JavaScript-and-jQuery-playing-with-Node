@@ -1,0 +1,39 @@
+extends ../layout
+
+append stylesheets
+  style
+    form {
+      padding: 10px 10px 10px 10px;
+    }
+    label {
+      display: inline-block;
+      width: 100px;
+      text-align:right;
+      margin: 0 15px 0 0;
+      color: white;
+    }
+    input {
+      font-size: 14px;
+    }
+    #button {
+      margin-left: 115px;
+    }
+
+append scripts
+  script(src='/_js/jquery-1.8.2.min.js')
+  script(src='/_js/chapter11/login.js')
+
+block content
+  div.content
+    div.main
+      h1= title
+      div#formFrame
+        form(id='login', action='/login', method='POST')
+          p
+            label(for='username') Username:
+            input(id='username', type='text', name='username')
+          p
+            label(for='password') Password:
+            input(id='password', type='password', name='password')
+          p
+            input(id='button', type='submit', name='button', value='Submit')

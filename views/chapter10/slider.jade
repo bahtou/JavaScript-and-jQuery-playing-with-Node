@@ -1,0 +1,28 @@
+extends ../layout
+
+append stylesheets
+  link(href='/_js/anythingSlider/anythingslider.css', rel='stylesheet')
+
+append scripts
+  script(src='/_js/jquery-1.8.2.min.js')
+  script(src='/_js/anythingSlider/jquery.anythingslider.min.js')
+  script
+    $(document).ready(function() {
+      $('#slider').anythingSlider();
+    }); //end ready
+
+block content
+  div.content
+    div.main
+      h1= title
+
+      div#slider
+        div
+          a(href='/page1')
+            img(src='/_images/chapter10/pumpkin.jpg', width='700', height='390', alt='Pumpkin')
+        div
+          a(href='/page2')
+            img(src='/_images/chapter10/grapes.jpg', width='700', height='390', alt='Grapes')
+        div
+          a(href='/page3')
+            img(src='/_images/chapter10/various.jpg', width='700', height='390', alt='Various')

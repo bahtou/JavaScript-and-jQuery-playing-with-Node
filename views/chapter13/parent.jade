@@ -1,0 +1,75 @@
+extends ../layout
+
+append stylesheets
+  style
+    #gallery a {
+      display: inline-block;
+      width: 80px;
+      height: 80px;
+      margin: 10px;
+    }
+    #gallery img {
+      border: none; 
+    }
+
+append scripts
+  script(src='/_js/jquery-1.8.2.min.js')
+  script
+    $(document).ready(function() {
+      $('#gallery a').hover(
+        function() {
+          // add outline to link
+          $(this).css('outline', '2px solid red');
+          // add background color to div
+          $(this).parent().css('backgroundColor', 'rgb(110, 138, 195)');
+        },
+        function() {
+          // remove outline from link
+          $(this).css('outline', '');
+          // remove background color from div
+          $(this).parent().css('backgroundColor', '');
+        }
+      ); //end hover
+    }); //end ready
+
+block content
+  .content
+    .main
+      h1= title
+      #gallery
+        a(href='#')
+          img(src='_images/chapter13/zoom_out.png', width='80', height='80', alt='zoom')
+        a(href='#')
+          img(src='_images/chapter13/vacancy.png', width='80', height='80', alt='vacnacy')
+        a(href='#')
+          img(src='_images/chapter13/user.png', width='80', height='80', alt='user')
+        a(href='#')
+          img(src='_images/chapter13/upload.png', width='80', height='80', alt='upload')
+        a(href='#')
+          img(src='_images/chapter13/undo.png', width='80', height='80', alt='undo')
+        a(href='#')
+          img(src='_images/chapter13/support.png', width='80', height='80', alt='support')
+        a(href='#')
+          img(src='_images/chapter13/stop_sign.png', width='80', height='80', alt='stop')
+        a(href='#')
+          img(src='_images/chapter13/smiley.png', width='80', height='80', alt='smiley')
+        a(href='#')
+          img#zoom(src='_images/chapter13/newsletter.png', width='80', height='80', alt='newsletter')
+        a(href='#')
+          img(src='_images/chapter13/lock.png', width='80', height='80', alt='lock')
+        a(href='#')
+          img(src='_images/chapter13/group.png', width='80', height='80', alt='group')
+        a(href='#')
+          img(src='_images/chapter13/export.png', width='80', height='80', alt='export')
+        a(href='#')
+          img(src='_images/chapter13/email.png', width='80', height='80', alt='email')
+        a(href='#')
+          img(src='_images/chapter13/digital_camera.png', width='80', height='80', alt='camera')
+        a(href='#')
+          img(src='_images/chapter13/configuration.png', width='80', height='80', alt='config')
+        a(href='#')
+          img(src='_images/chapter13/bar_chart.png', width='80', height='80', alt='bar chart')
+        a(href='#')
+          img(src='_images/chapter13/attachment.png', width='80', height='80', alt='attachement')
+        a(href='#')
+          img(src='_images/chapter13/addressbook.png', width='80', height='80', alt='addressbook')

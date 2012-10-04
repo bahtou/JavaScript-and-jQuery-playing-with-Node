@@ -1,0 +1,176 @@
+extends ../layout
+
+append stylesheets
+
+append scripts
+  script(src='/_js/jquery-1.8.2.min.js')
+  script(src='/_js/site.js')
+  script
+    $(document).ready(function() {
+      var regObject = {};
+
+      function displayResults(message) {
+        if ($('#resultSection:visible').length===0) $('#resultSection').show();
+        $('#testResults').html('<p>' + message + '</p>');
+      }
+
+      function buildResults() {
+        var resultString="No match"; // default setting
+        var formatSearch = regObject.testString.replace(regObject.regex,'<strong class="found">$&</strong>');
+
+
+        switch (regObject.method) {
+          case 'search' :
+            if(regObject.results==-1) break; // no match
+            resultString = 'Found at position ' + regObject.results;
+            resultString += ' in string: <br>' + formatSearch + '';
+            break;
+          case 'match' :
+            if (! regObject.results) break; // no match
+            resultString = '';
+            for (i in regObject.results) {
+              resultString += (i + ':');
+              if (i == 'input') {
+                resultString += (formatSearch);
+              } else {
+                resultString += regObject.results[i];
+              }
+              resultString += '<br>';
+            }
+            break;
+          case 'replace' :
+            if (regObject.results==regObject.testString) break; // no match
+            resultString = '';
+            resultString += regObject.results;
+            break;
+        }
+        var prependString = "Regex: " + regObject.reValue + "<br>";
+        return prependString + resultString;
+      }
+
+      $('#regexTester').submit(function() {
+
+        //get string
+        regObject.testString = $('#string').val();
+
+        //any options
+        regObject.options='';
+        $(':checkbox:checked').each(function() {
+          regObject.options += $(this).val();
+        });
+
+
+        //get regular expression value and convert to regex
+        regObject.reValue = $('#regex').val();
+        try {
+        regObject.regex = new RegExp(regObject.reValue,regObject.options);
+        } catch (e) {
+          displayResults("ERROR IN YOUR REGULAR EXPRESSION<br>" + e);
+          return false;
+        }
+
+        //method
+        regObject.method = $('[name=method]:checked').val();
+
+        //replace
+        if (regObject.method=='replace') {
+          regObject.replaceString = $('#replaceString').val();
+        }
+
+        if (regObject.method=='search') {
+          regObject.results = regObject.testString.search(regObject.regex);
+        } else if (regObject.method=='match')  {
+          regObject.results = regObject.testString.match(regObject.regex);
+        } else {
+          regObject.results = regObject.testString.replace(regObject.regex,'<strong class="found">' + regObject.replaceString + "</strong>");
+        }
+        displayResults(buildResults());
+        return false;
+      }); //end submit
+
+      //hide replacement box until needed
+      $('#replaceBox').hide();
+      //show replacement box when replace selected
+      $('#replace').click(function() {
+        $('#replaceBox').show('fast');
+       });
+      //hide replacement box if either of the other two buttons selected
+      $('#search, #match').click(function() {
+        $('#replaceBox').hide('fast');
+      }); //end click
+    }); //end ready
+
+block content
+  .content
+    .main
+      h1 Regular Expression Tester
+      .results.resultSection
+        h2
+          | Results
+          small (Matched text in red)
+        #testResults
+      form#regexTester(action='', method='post', name='form1')
+        h2 Test
+        p
+          label.label(for='string') String to search
+          textarea#string.wide(name='string', rows='3')
+        p
+          label.label(for='regex') Regular Expression to use
+          input#regex.wide(name='regex', type='text')
+        p
+          span.label Method to Use
+          label
+            input#search(name='method', type='radio', value='search', checked='checked')
+            | Search
+          label
+            input#match(type='radio', name='method', value='match')
+            | Match
+          label
+            input#replace(type='radio', name='method', value='replace')
+            | Replace
+        #replaceBox
+          label(for='replaceString') Replace with:
+          input#replaceString.medium(name='replaceString', type='text')
+        p
+          span.label Options
+          label
+            input#case(name='case', type='checkbox', value='i')
+            | Case Insensitive
+          label
+            input#global(name='global', type='checkbox', value='g')
+            | Global
+        input#button(type='submit', name='button', value='Run')
+
+
+block end
+  #resources
+    p.open
+      | +
+
+    h2
+      | Test Beds
+    ul.nav
+      li
+        a(href='/selectors') jQuery Selectors Testbed
+      li
+        a(href='/content_functions') jQuery Content Functions Test Bed
+      li
+        a(href='/events') Events Test Bed
+      li
+        a(href='/effects') jQuery Effects Test Bed
+      li
+        a(href='/array_methods') Array Methods
+      li
+        a(href='/regex_tester') Regular Expression Tester
+
+    h2
+      | jQuery Resources
+    ul.nav
+      li
+        a(href='http://jquery.com') jQuery
+      li
+        a(href='http://jqueryui.com/') jQuery UI
+      li
+        a(href='http://jquerymobile.com/') jQuery Mobile
+      li
+        a(href='http://jqapi.com/') jQAPI.com

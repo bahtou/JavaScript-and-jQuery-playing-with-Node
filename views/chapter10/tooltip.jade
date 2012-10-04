@@ -1,0 +1,128 @@
+extends ../layout
+
+append stylesheets
+  style
+    .trigger {
+      cursor : help;
+      border-bottom: 1px dashed white;
+    }
+    .trigger:hover {
+      color: rgb(255,0,0);
+    }
+
+    .tooltip {
+      width: 25%;
+      padding: 5px;
+      background-color: white;
+      border: 3px solid rgb(195,151,51);
+      border-radius : 5px;
+    }
+
+    .tooltip h2 {
+
+    }
+    .tooltip p {
+      color: black !important;
+    }
+
+append scripts
+  script(src='/_js/jquery-1.8.2.min.js')
+  script
+    $(document).ready(function() {
+      $('.tooltip').hide();
+      $('.trigger').mouseover(function() {
+        var ttLeft,
+            ttRight,
+            $this = $(this),
+            $tip = $($this.attr('data-tooltip')),
+            triggerPos = $this.offset(),
+            triggerH = $this.outerHeight(),
+            triggerW = $this.outerWidth(),
+            tipW = $tip.outerWidth(),
+            tipH = $tip.outerHeight(),
+            screenW = $(window).width(),
+            scrollTop = $(document).scrollTop();
+
+        if (triggerPos.top - tipH - scrollTop > 0) {
+          ttTop = triggerPos.top - tipH - 10;
+        } else {
+          ttTop = triggerPos.top + triggerH + 10;
+        }
+        var overFlowRight = (triggerPos.left + tipW) - screenW;
+        if (overFlowRight > 0) {
+          ttLeft = triggerPos.left - overFlowRight - 10;
+        } else {
+          ttLeft = triggerPos.left;
+        }
+        $tip.css({
+          left: ttLeft,
+          top: ttTop,
+          position: 'absolute',
+        }).fadeIn(200);
+      }); //end mouseover
+      
+      $('.trigger').mouseout(function() {
+        $('.tooltip').fadeOut(200);
+      }); //end mouseout
+
+    }); //end ready
+
+block content
+  div.content
+    div.main
+      h1= title
+      p
+        | At vero eos et odio dignissimos accusamus et iusto ducimus qui blanditiis
+        | praesentium 
+        span.trigger(data-tooltip='#tip1') voluptatum deleniti atque
+        |  corrupti quos dolores et quas molestias
+        | excepturi sint occaecati cupiditate non provident, similique sunt in culpa
+        | qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
+      p
+        | At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+        | praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias
+        | excepturi sint occaecati cupiditate non provident, similique sunt in culpa
+        | qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
+      p
+        | At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+        | praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias
+        | excepturi sint occaecati cupiditate non provident, similique sunt in culpa
+        | qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
+      p
+        | At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+        | praesentium 
+        span.trigger(data-tooltip='#tip2') voluptatum
+        |  deleniti atque corrupti quos dolores et quas molestias
+        | excepturi sint occaecati cupiditate non provident, similique sunt in culpa
+        | qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
+      p
+        | At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+        | praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias
+        | excepturi sint occaecati cupiditate non provident, similique sunt in culpa
+        | qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
+      p
+        | At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+        | praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias
+        | excepturi sint occaecati cupiditate non provident, similique sunt in culpa
+        | qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
+      p
+        | At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+        | praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias
+        | excepturi sint occaecati cupiditate non provident, similique sunt in culpa
+        | qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
+      p
+        | At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+        | praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias
+        | excepturi sint occaecati cupiditate non provident, similique sunt in culpa
+        | qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
+
+block end
+  div.tooltip#tip1
+    h2 A Tooltip
+    p
+      | This is the tooltip text.  It's inside a dive tag so you can put anything inside on of these.
+  div.tooltip#tip2
+    h2 Another Tooltip
+    p
+      img.imgRight(src='/_images/small/yellow_h.jpg', alt='yellow', width='70')
+      | This is another tooptip.  Look there's even a photo here.

@@ -22,9 +22,10 @@ Once you get over the indentation that `jade` uses (if you're coming from `pytho
 ## Learn the docs ##
 
 ---------
-- [node.js](http://nodejs.org/api/)
-- [express.js](http://expressjs.com/api.html)
-- [jade.js](https://github.com/visionmedia/jade#readme).
+- [node.js](http://nodejs.org/api/) v0.8.11
+- [express.js](http://expressjs.com/api.html) v3.0.0.rc2
+- [jade.js](https://github.com/visionmedia/jade#readme) v0.27.2
+- [jquery.js](http://docs.jquery.com/) v1.8.2
 
 
 </br>
